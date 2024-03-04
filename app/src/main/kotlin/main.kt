@@ -1,5 +1,4 @@
 
-
 fun main(args: Array<String>) {
     biodata("Cipta Rangga Wijaya", 18)
     hobby("Mancing", "Saya lakukan pada saat liburan kuliah, hal yang paling seru saat memancing yaitu menunggu sambaran ikan")
