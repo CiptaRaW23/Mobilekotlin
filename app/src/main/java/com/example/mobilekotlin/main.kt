@@ -1,4 +1,4 @@
-package example.myapp
+package example.mobilekotlin
 
 import com.example.mobilekotlin.Plecostomus
 import com.example.mobilekotlin.Shark
