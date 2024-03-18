@@ -1,63 +1,51 @@
-import java.util.Random
+package example.myapp
 
-fun randomDay() : String {
-    val week = arrayOf ("Monday", "Tuesday", "Wednesday", "Thursday",
-        "Friday", "Saturday", "Sunday")
-    return week[Random().nextInt(week.size)]
-}
+import java.lang.Math.PI
+open class Aquarium (open var length: Int = 100, open var width: Int = 20, open var height: Int = 40) {
+    open var volume: Int
+        get() = width * height * length / 1000
+        set(value) {
+            height = (value * 1000) / (width * length)
+        }
+    open var water: Double = 0.0
+        get() = volume * 0.9
 
-fun fishFood (day : String) : String {
-    return when (day) {
-        "Monday" -> "flakes"
-        "Wednesday" -> "redworms"
-        "Thursday" -> "granules"
-        "Friday" -> "mosquitoes"
-        "Sunday" -> "plankton"
-        else -> "nothing"
+    open val shape = "rectangle"
+    var numberOfFish = 0
+
+    init {
+        println("aquarium initializing")
     }
-}
 
-fun shouldChangeWater (day: String, temperature: Int = 22, dirty: Int = 20): Boolean {
-    return when {
-        temperature > 30 -> true
-        dirty > 30 -> true
-        day == "Sunday" ->  true
-        else -> false
+    init {
+        println("Volume: ${width * length * height / 1000} liters")
     }
-}
 
-fun isTooHot(temperature: Int) = temperature > 30
+    //constructor sekunder
+    constructor(numberOfFish: Int) : this() {
+        val tank = numberOfFish * 2000 * 1.1
+        height = (tank / (length * width)).toInt()
+    }
 
-fun isDirty(dirty: Int) = dirty > 30
+    fun printSize() {
+        println(
+            "Shape: $shape" +
+                    "Width: $width cm " +
+                    "Length: $length cm " +
+                    "Height: $height cm " +
+                    "Volume: $volume liters Water: $water liters (${water / volume * 100.0}% full)"
+        )
+    }
 
-fun isSunday(day: String) = day == "Sunday"
 
-fun feedTheFish() {
-    val day = randomDay()
-    val food = fishFood(day)
-    println ("Today is $day and the fish eat $food")
-    println("Change water: ${shouldChangeWater(day)}")
-}
-
-fun swim(speed: String = "fast") {
-    println("swimming $speed")
-}
-
-fun main(args: Array<String>) {
-    swim()
-    swim("slow")
-    swim(speed="turtle-like")
-
-    val isUnit = println("This is an expression")
-    println(isUnit)
-
-    val temperature = 10
-    val isHot = if (temperature > 50) true else false
-    println(isHot)
-
-    val temperature1 = 51
-    val message = "The water temperature is ${ if (temperature1 > 50) "too warm" else "OK" }."
-    println(message)
-
-    feedTheFish()
+    class TowerTank(override var height: Int, var diameter: Int) :
+        Aquarium(height = height, width = diameter, length = diameter) {
+        override var volume: Int
+            get() = (width / 2 * length / 2 * height / 1000 * PI).toInt()
+            set(value) {
+                height = ((value * 1000 / PI) / (width / 2 * length / 2)).toInt()
+            }
+        override var water = volume * 0.8
+        override val shape = "cylinder"
+    }
 }
