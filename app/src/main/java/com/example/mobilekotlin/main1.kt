@@ -13,8 +13,7 @@ fun main() {
     println("Urutan klub berdasarkan jumlah total trofi: ")
     sortedClubs.forEach { club -> println("${club.name}: ${club.totalTrophies}trophy") }
 
-    val filteredClubs = filterAndSort(clubs, ::filterByEuropeanTrophy)
-    // Hasil sorting total trofi
+    val filteredClubs = filterAndSort(clubs, ::filterByUCLUEL)
     println("==========================================================")
     println("Klub yang belum pernah memenangkan UCL dan UEL:")
     filteredClubs.forEach { println(it.name) }
@@ -40,6 +39,6 @@ fun sortByNumberTrophyTotal(clubs: List<Club>): List<Club> {
 }
 
 // Fungsi filter
-fun filterByEuropeanTrophy(clubs: List<Club>): List<Club> {
+fun filterByUCLUEL(clubs: List<Club>): List<Club> {
     return clubs.filter { it.championsLeagueTrophies == 0 && it.europaLeagueTrophies == 0 }
 }
