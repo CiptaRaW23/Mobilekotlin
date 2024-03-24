@@ -7,14 +7,12 @@ fun main() {
         Club("Arsenal", 13, 14, 2, 0, 0)
     )
 
-    // Passing a named function ::sortByNumberTrophyTotal
     val sortedClubs = filterAndSort(clubs, ::sortByNumberTrophyTotal)
     // Hasil sorting total trofi
     println("==========================================================")
     println("Urutan klub berdasarkan jumlah total trofi: ")
     sortedClubs.forEach { club -> println("${club.name}: ${club.totalTrophies}trophy") }
 
-    // Passing a named function ::filterByEuropeanTrophy
     val filteredClubs = filterAndSort(clubs, ::filterByEuropeanTrophy)
     // Hasil sorting total trofi
     println("==========================================================")
@@ -32,7 +30,6 @@ fun main() {
     println(clubs.find { it.name == "Arsenal" }?.recap())
 }
 
-// High order function filter and sort
 fun filterAndSort(clubs: List<Club>, options: (List<Club>) -> List<Club>): List<Club> {
     return options(clubs)
 }
